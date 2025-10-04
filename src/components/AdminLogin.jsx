@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
 
-const Login = () => {
+const AdminLogin = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: ''
   });
 
@@ -19,15 +19,15 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login submitted:', formData);
+    console.log('Admin login submitted:', formData);
+  };
+
+  const handleUserLoginRedirect = () => {
+    navigate('/login');
   };
 
   const handleSignUpRedirect = () => {
     navigate('/signup');
-  };
-
-  const handleAdminRedirect = () => {
-    navigate('/admin-login');
   };
 
   return (
@@ -49,12 +49,12 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Admin Button - Top Right */}
+      {/* User Login Button - Top Right */}
       <button 
-        onClick={handleAdminRedirect}
+        onClick={handleUserLoginRedirect}
         className="absolute right-16 top-16 px-4 py-2 bg-[#ECE9FB] rounded-lg text-[#533DDE] font-medium text-lg hover:bg-[#E0DCF9] transition-colors"
       >
-        Admin?
+        User Login
       </button>
 
       {/* Group 8 - Center Background Icon */}
@@ -66,25 +66,25 @@ const Login = () => {
         />
       </div>
 
-      {/* Main Login Card */}
+      {/* Main Admin Login Card */}
       <div className="flex justify-center items-center min-h-screen">
         <div className="w-full max-w-[855px] bg-white rounded-xl shadow-[0px_6px_18px_rgba(100,81,225,0.16)] p-12 ml-64">
           <div className="flex flex-col gap-8 w-full">
             {/* Header */}
             <h2 className="text-4xl font-bold text-center text-[#333333] tracking-wide mb-4">
-              Login
+              Admin Login
             </h2>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-              {/* User Mail Field */}
+              {/* Admin Username Field */}
               <div className="w-full h-14 bg-[#F2F2F2] rounded-lg px-4 flex items-center">
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="User mail"
+                  type="text"
+                  name="username"
+                  placeholder="admin"
                   className="w-full bg-transparent outline-none text-[#999999] font-medium text-lg placeholder-[#999999]"
-                  value={formData.email}
+                  value={formData.username}
                   onChange={handleChange}
                 />
               </div>
@@ -99,16 +99,6 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleChange}
                 />
-              </div>
-
-              {/* Forget Password */}
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  className="text-[#533DDE] font-medium text-lg hover:underline"
-                >
-                  Forget password ?
-                </button>
               </div>
 
               {/* Action Buttons */}
@@ -127,7 +117,7 @@ const Login = () => {
                   type="submit"
                   className="px-8 py-4 bg-[#533DDE] rounded-lg text-white font-medium text-lg hover:bg-[#311EAE] transition-colors min-w-[120px]"
                 >
-                  Sign in
+                  Sign In
                 </button>
               </div>
             </form>
@@ -145,4 +135,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

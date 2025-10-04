@@ -28,6 +28,10 @@ const SignUp = () => {
     navigate('/login');
   };
 
+  const handleAdminRedirect = () => {
+    navigate('/admin-login');
+  };
+
   return (
     <div className="min-h-screen bg-[#FAF9FF] font-poppins relative overflow-hidden">
       {/* Background Blur Effects */}
@@ -48,7 +52,10 @@ const SignUp = () => {
       </div>
 
       {/* Admin Button - Top Right */}
-      <button className="absolute right-16 top-16 px-4 py-2 bg-[#ECE9FB] rounded-lg text-[#533DDE] font-medium text-lg hover:bg-[#E0DCF9] transition-colors">
+      <button 
+        onClick={handleAdminRedirect}
+        className="absolute right-16 top-16 px-4 py-2 bg-[#ECE9FB] rounded-lg text-[#533DDE] font-medium text-lg hover:bg-[#E0DCF9] transition-colors"
+      >
         Admin?
       </button>
 
