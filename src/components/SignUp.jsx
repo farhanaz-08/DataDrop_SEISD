@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from "../assets/logo.png";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +9,8 @@ const SignUp = () => {
     department: '',
     role: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -20,6 +24,10 @@ const SignUp = () => {
     console.log('Form submitted:', formData);
   };
 
+  const handleLoginRedirect = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-[#FAF9FF] font-poppins relative overflow-hidden">
       {/* Background Blur Effects */}
@@ -28,12 +36,11 @@ const SignUp = () => {
       
       {/* Logo Section - Top Left */}
       <div className="absolute left-16 top-12 flex items-center gap-3">
-        <div className="w-14 h-14 bg-[#533DDE] rounded-xl flex items-center justify-center">
-          {/* Clean message bubble icon */}
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 16V20L10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V14C4 15.1046 4.89543 16 6 16Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
+        <img 
+          src={logo} 
+          alt="Data Drop Logo" 
+          className="w-14 h-14 object-contain rounded-lg"
+        />
         <div className="flex flex-col">
           <h1 className="text-[#180F57] font-semibold text-xl tracking-wide">DATA DROP</h1>
           <p className="text-[#666666] text-lg">University Forum</p>
@@ -45,21 +52,16 @@ const SignUp = () => {
         Admin?
       </button>
 
-      {/* Group 8 Logo - Clean Message Bubble Icon */}
+      {/* Group 8 - Center Background Icon */}
       <div className="absolute w-[251px] h-[251px] left-[248px] top-[415px]">
-        {/* Blur background */}
-        <div className="absolute w-[235px] h-[235px] left-[16px] top-[16px] bg-[#8B7CE9] blur-[6px] rounded-[44.7619px]"></div>
-        
-        {/* Main icon - Clean Message Bubble */}
-        <div className="absolute w-[235px] h-[235px] left-0 top-0 bg-[#533DDE] rounded-[44.7619px] shadow-[0px_6px_30px_rgba(41,35,92,0.25)] flex items-center justify-center">
-          {/* Clean message bubble SVG */}
-          <svg width="135" height="128" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 16V20L10 16H18C19.1046 16 20 15.1046 20 14V6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V14C4 15.1046 4.89543 16 6 16Z" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
+        <img 
+          src={logo} 
+          alt="Data Drop Background Logo" 
+          className="w-[235px] h-[235px] rounded-[44px] shadow-[0px_6px_30px_rgba(41,35,92,0.25)]"
+        />
       </div>
 
-      {/* Main Signup Card - Centered */}
+      {/* Main Signup Card */}
       <div className="flex justify-center items-center min-h-screen">
         <div className="w-full max-w-[855px] bg-white rounded-xl shadow-[0px_6px_18px_rgba(100,81,225,0.16)] p-12 ml-64">
           <div className="flex flex-col gap-8 w-full">
@@ -108,17 +110,16 @@ const SignUp = () => {
                 </div>
               </div>
 
-              {/* Action Buttons - Fixed alignment */}
+              {/* Action Buttons */}
               <div className="flex justify-between items-center pt-6">
-                {/* Already have account - Left aligned */}
                 <button
                   type="button"
+                  onClick={handleLoginRedirect}
                   className="px-6 py-3 bg-[#ECE9FB] rounded-lg text-[#533DDE] font-medium text-lg hover:bg-[#E0DCF9] transition-colors"
                 >
                   Already have an account?
                 </button>
                 
-                {/* Sign Up Button - Right side */}
                 <button
                   type="submit"
                   className="px-8 py-4 bg-[#533DDE] rounded-lg text-white font-medium text-lg hover:bg-[#311EAE] transition-colors min-w-[120px]"
