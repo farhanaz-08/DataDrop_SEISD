@@ -45,7 +45,7 @@ const Login = () => {
         />
         <div className="flex flex-col">
           <h1 className="text-[#180F57] font-semibold text-xl tracking-wide">DATA DROP</h1>
-          <p className="text-[#666666] text-lg">University Forum</p>
+          <p className="text-[#666666] text-lg">RPSU Forum</p>
         </div>
       </div>
 

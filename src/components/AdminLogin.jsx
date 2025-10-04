@@ -45,7 +45,7 @@ const AdminLogin = () => {
         />
         <div className="flex flex-col">
           <h1 className="text-[#180F57] font-semibold text-xl tracking-wide">DATA DROP</h1>
-          <p className="text-[#666666] text-lg">University Forum</p>
+          <p className="text-[#666666] text-lg">RPSU Forum</p>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ const AdminLogin = () => {
                 <input
                   type="text"
                   name="username"
-                  placeholder="admin"
+                  placeholder="Admin Name"
                   className="w-full bg-transparent outline-none text-[#999999] font-medium text-lg placeholder-[#999999]"
                   value={formData.username}
                   onChange={handleChange}
