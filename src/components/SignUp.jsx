@@ -10,7 +10,12 @@ const SignUp = () => {
     role: ''
   });
 
+  const [showRoleDropdown, setShowRoleDropdown] = useState(false);
+  const [showDepartmentDropdown, setShowDepartmentDropdown] = useState(false);
   const navigate = useNavigate();
+
+  // Department options
+  const departments = ['CSE', 'EEE', 'LAW', 'BBA', 'Pharmacy', 'TFD'];
 
   const handleChange = (e) => {
     setFormData({
@@ -30,6 +35,22 @@ const SignUp = () => {
 
   const handleAdminRedirect = () => {
     navigate('/admin-login');
+  };
+
+  const handleRoleSelect = (role) => {
+    setFormData({
+      ...formData,
+      role: role
+    });
+    setShowRoleDropdown(false);
+  };
+
+  const handleDepartmentSelect = (department) => {
+    setFormData({
+      ...formData,
+      department: department
+    });
+    setShowDepartmentDropdown(false);
   };
 
   return (
@@ -83,10 +104,11 @@ const SignUp = () => {
               <div className="w-full h-14 bg-[#F2F2F2] rounded-lg px-4 flex items-center">
                 <input
                   type="text"
+                  name="username"
                   placeholder="Username"
-                  className="w-full bg-transparent outline-none text-[#999999] font-medium text-lg placeholder-[#999999]"
+                  className="w-full bg-transparent outline-none text-[#333333] font-medium text-lg placeholder-[#999999]"
                   value={formData.username}
-                  onChange={(e) => setFormData({...formData, username: e.target.value})}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -94,27 +116,75 @@ const SignUp = () => {
               <div className="w-full h-14 bg-[#F2F2F2] rounded-lg px-4 flex items-center">
                 <input
                   type="email"
+                  name="email"
                   placeholder="University mail"
-                  className="w-full bg-transparent outline-none text-[#999999] font-medium text-lg placeholder-[#999999]"
+                  className="w-full bg-transparent outline-none text-[#333333] font-medium text-lg placeholder-[#999999]"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={handleChange}
                 />
               </div>
 
-              {/* Department Field */}
-              <div className="w-full h-14 bg-[#F2F2F2] rounded-lg px-4 flex items-center justify-between cursor-pointer hover:bg-[#E8E8E8] transition-colors">
-                <span className="text-[#333333] font-medium text-lg">Department</span>
-                <div className="w-6 h-6 flex items-center justify-center">
-                  <div className="w-2 h-2 border-r-2 border-b-2 border-[#333333] transform rotate-45 translate-y-[-1px]"></div>
+              {/* Department Field - Updated with Dropdown */}
+              <div className="relative">
+                <div 
+                  className="w-full h-14 bg-[#F2F2F2] rounded-lg px-4 flex items-center justify-between cursor-pointer hover:bg-[#E8E8E8] transition-colors"
+                  onClick={() => setShowDepartmentDropdown(!showDepartmentDropdown)}
+                >
+                  <span className={`font-medium text-lg ${formData.department ? 'text-[#333333]' : 'text-[#999999]'}`}>
+                    {formData.department || 'Department'}
+                  </span>
+                  <div className="w-6 h-6 flex items-center justify-center">
+                    <div className={`w-2 h-2 border-r-2 border-b-2 border-[#333333] transform ${showDepartmentDropdown ? 'rotate-225 translate-y-[1px]' : 'rotate-45 translate-y-[-1px]'} transition-transform`}></div>
+                  </div>
                 </div>
+
+                {/* Department Dropdown Menu */}
+                {showDepartmentDropdown && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-[0px_6px_18px_rgba(100,81,225,0.16)] z-10 overflow-hidden max-h-48 overflow-y-auto">
+                    {departments.map((dept, index) => (
+                      <div 
+                        key={dept}
+                        className={`px-4 py-3 hover:bg-[#ECE9FB] cursor-pointer transition-colors ${index < departments.length - 1 ? 'border-b border-gray-100' : ''}`}
+                        onClick={() => handleDepartmentSelect(dept)}
+                      >
+                        <span className="text-[#333333] font-medium text-lg">{dept}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* User Role Field */}
-              <div className="w-full h-14 bg-[#F2F2F2] rounded-lg px-4 flex items-center justify-between cursor-pointer hover:bg-[#E8E8E8] transition-colors">
-                <span className="text-[#4D4D4D] font-medium text-lg">User role (teacher/student)</span>
-                <div className="w-6 h-6 flex items-center justify-center">
-                  <div className="w-2 h-2 border-r-2 border-b-2 border-[#333333] transform rotate-45 translate-y-[-1px]"></div>
+              {/* User Role Field - Updated with Dropdown */}
+              <div className="relative">
+                <div 
+                  className="w-full h-14 bg-[#F2F2F2] rounded-lg px-4 flex items-center justify-between cursor-pointer hover:bg-[#E8E8E8] transition-colors"
+                  onClick={() => setShowRoleDropdown(!showRoleDropdown)}
+                >
+                  <span className={`font-medium text-lg ${formData.role ? 'text-[#333333]' : 'text-[#999999]'}`}>
+                    {formData.role || 'User role (teacher/student)'}
+                  </span>
+                  <div className="w-6 h-6 flex items-center justify-center">
+                    <div className={`w-2 h-2 border-r-2 border-b-2 border-[#333333] transform ${showRoleDropdown ? 'rotate-225 translate-y-[1px]' : 'rotate-45 translate-y-[-1px]'} transition-transform`}></div>
+                  </div>
                 </div>
+
+                {/* Dropdown Menu */}
+                {showRoleDropdown && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-[0px_6px_18px_rgba(100,81,225,0.16)] z-10 overflow-hidden">
+                    <div 
+                      className="px-4 py-3 hover:bg-[#ECE9FB] cursor-pointer transition-colors border-b border-gray-100"
+                      onClick={() => handleRoleSelect('Teacher')}
+                    >
+                      <span className="text-[#333333] font-medium text-lg">Teacher</span>
+                    </div>
+                    <div 
+                      className="px-4 py-3 hover:bg-[#ECE9FB] cursor-pointer transition-colors"
+                      onClick={() => handleRoleSelect('Student')}
+                    >
+                      <span className="text-[#333333] font-medium text-lg">Student</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Action Buttons */}
