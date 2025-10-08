@@ -15,35 +15,63 @@ const Navbar = () => {
   ];
 
   const communities = [
-    { name: 'CSE_bookClub', members: '1.2k', icon: '📚' },
-    { name: 'CSE_Cultural', members: '856', icon: '🎭' },
-    { name: 'CSE_Debate', members: '432', icon: '💬' },
-    { name: 'BBA_Cultural', members: '723', icon: '🎨' }
+    { name: 'CSE_bookClub', icon: '📚' },
+    { name: 'CSE_Cultural', icon: '🎭' },
+    { name: 'CSE_Debate', icon: '💬' },
+    { name: 'BBA_Cultural', icon: '🎨' }
   ];
 
   const isActivePath = (path) => location.pathname === path;
 
+  const handleLogout = () => {
+    console.log('User logged out');
+    navigate('/login');
+  };
+
   return (
-    <div className="flex h-screen bg-white">
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200">
-        {/* Logo */}
-        <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-[#533DDE] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">DD</span>
-            </div>
-            <div>
-              <h1 className="font-bold text-lg text-[#180F57]">DATA DROP</h1>
-              <p className="text-xs text-[#999999]">RPSU Forum</p>
-            </div>
+    <>
+      {/* Top Header Bar - Fixed at top */}
+      <div className="fixed top-0 left-0 right-0 h-[118px] bg-white border-b border-gray-200 z-50 flex items-center justify-between px-8">
+        {/* Logo Section */}
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-[#533DDE] rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-lg">DD</span>
+          </div>
+          <div className="flex flex-col">
+            <h1 className="text-[#180F57] font-bold text-2xl tracking-wide">DATA DROP</h1>
+            <p className="text-[#666666] text-lg">University Forum</p>
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="flex-1 p-4">
-          <div className="mb-8">
-            <h3 className="text-sm font-semibold text-[#4D4D4D] mb-4 px-4">OVERVIEW</h3>
+        {/* Search Bar */}
+        <div className="flex-1 max-w-2xl mx-8">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Type to search"
+              className="w-full bg-[#F2F2F2] rounded-xl py-3 px-6 pl-12 focus:outline-none focus:ring-2 focus:ring-[#533DDE] text-lg border-0"
+            />
+            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#999999] text-lg">
+              🔍
+            </span>
+          </div>
+        </div>
+
+        {/* User Profile */}
+        <div className="flex items-center gap-4">
+          <button className="w-10 h-10 bg-[#ECE9FB] rounded-full flex items-center justify-center hover:bg-[#E0DCF9] transition-colors">
+            <span className="text-[#533DDE] text-lg">👤</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Sidebar - Fixed below header */}
+      <div className="fixed top-[118px] left-0 h-[calc(100vh-118px)] bg-white border-r border-[#D8D3F8] z-40">
+        {/* Desktop Sidebar */}
+        <div className="hidden lg:flex flex-col w-[310px] h-full p-6 gap-8">
+          {/* OVERVIEW Section */}
+          <div>
+            <h3 className="text-sm font-semibold text-[#4D4D4D] mb-4 uppercase tracking-wide">OVERVIEW</h3>
             <nav className="space-y-2">
               {navItems.map((item) => (
                 <button
@@ -55,100 +83,146 @@ const Navbar = () => {
                       : 'text-[#4D4D4D] hover:bg-gray-50'
                   }`}
                 >
-                  <span className="text-lg">{item.icon}</span>
-                  <span>{item.label}</span>
+                  <span className="text-xl">{item.icon}</span>
+                  <span className="text-base">{item.label}</span>
                 </button>
               ))}
             </nav>
           </div>
 
-          {/* Create Community Section */}
+          {/* CREATE COMMUNITY Section */}
           <div>
-            <h3 className="text-sm font-semibold text-[#4D4D4D] mb-4 px-4">CREATE COMMUNITY</h3>
+            <h3 className="text-sm font-semibold text-[#4D4D4D] mb-4 uppercase tracking-wide">CREATE COMMUNITY</h3>
             
-            {/* New Community Button */}
+            {/* NEW COMMUNITY Button */}
             <button className="w-full mb-6 bg-[#533DDE] text-white py-3 px-4 rounded-xl font-semibold hover:bg-[#311EAE] transition-colors flex items-center justify-center space-x-2">
-              <span>+</span>
-              <span>NEW COMMUNITY</span>
+              <span className="text-xl">+</span>
+              <span className="text-base">NEW COMMUNITY</span>
             </button>
 
-            {/* Recent Communities */}
-            <div className="mb-4">
-              <h4 className="text-xs font-semibold text-[#999999] mb-3 px-4 uppercase tracking-wide">RECENT COMMUNITY</h4>
+            {/* RECENT COMMUNITY Section */}
+            <div>
+              <h4 className="text-xs font-semibold text-[#999999] mb-3 uppercase tracking-wide">RECENT COMMUNITY</h4>
               <div className="space-y-2">
                 {communities.map((community) => (
                   <button
                     key={community.name}
-                    className="w-full flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-gray-50 text-left"
+                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 text-left transition-colors"
                   >
-                    <span className="text-lg">{community.icon}</span>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-[#333333]">{community.name}</p>
-                      <p className="text-xs text-[#999999]">{community.members} members</p>
-                    </div>
+                    <span className="text-xl">{community.icon}</span>
+                    <span className="text-base font-medium text-[#333333]">{community.name}</span>
                   </button>
                 ))}
               </div>
             </div>
           </div>
+
+          {/* Logout Button */}
+          <div className="mt-auto pt-4 border-t border-gray-200">
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left text-red-600 hover:bg-red-50 transition-colors"
+            >
+              <span className="text-xl">🚪</span>
+              <span className="text-base">Logout</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
-        <div className="flex items-center justify-between p-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-[#533DDE] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">DD</span>
-            </div>
-            <div>
-              <h1 className="font-bold text-lg text-[#180F57]">DATA DROP</h1>
-              <p className="text-xs text-[#999999]">RPSU Forum</p>
-            </div>
-          </div>
-          
-          <button 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-lg hover:bg-gray-100"
+      {/* Mobile Menu Button */}
+      <div className="lg:hidden fixed top-4 right-4 z-50">
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-3 rounded-lg bg-white shadow-lg hover:bg-gray-100 border border-gray-200"
+        >
+          <span className="text-2xl">☰</span>
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <div 
+            className="fixed top-0 left-0 w-80 h-full bg-white shadow-xl p-6 overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
           >
-            <span className="text-2xl">☰</span>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
-            <div className="p-4">
-              <h3 className="text-sm font-semibold text-[#4D4D4D] mb-3">OVERVIEW</h3>
-              <nav className="space-y-2 mb-6">
-                {navItems.map((item) => (
-                  <button
-                    key={item.path}
-                    onClick={() => {
-                      navigate(item.path);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left ${
-                      isActivePath(item.path)
-                        ? 'bg-[#ECE9FB] text-[#533DDE] font-semibold'
-                        : 'text-[#4D4D4D]'
-                    }`}
-                  >
-                    <span className="text-lg">{item.icon}</span>
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </nav>
-
-              <h3 className="text-sm font-semibold text-[#4D4D4D] mb-3">CREATE COMMUNITY</h3>
-              <button className="w-full bg-[#533DDE] text-white py-3 px-4 rounded-xl font-semibold mb-4">
-                + NEW COMMUNITY
+            {/* Close Button */}
+            <div className="flex justify-end mb-6">
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 rounded-lg hover:bg-gray-100"
+              >
+                <span className="text-2xl">✕</span>
               </button>
             </div>
+
+            {/* Mobile Menu Content */}
+            <div className="space-y-8">
+              {/* OVERVIEW Section */}
+              <div>
+                <h3 className="text-sm font-semibold text-[#4D4D4D] mb-4 uppercase tracking-wide">OVERVIEW</h3>
+                <nav className="space-y-2">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.path}
+                      onClick={() => {
+                        navigate(item.path);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left ${
+                        isActivePath(item.path)
+                          ? 'bg-[#ECE9FB] text-[#533DDE] font-semibold'
+                          : 'text-[#4D4D4D]'
+                      }`}
+                    >
+                      <span className="text-xl">{item.icon}</span>
+                      <span className="text-base">{item.label}</span>
+                    </button>
+                  ))}
+                </nav>
+              </div>
+
+              {/* CREATE COMMUNITY Section */}
+              <div>
+                <h3 className="text-sm font-semibold text-[#4D4D4D] mb-4 uppercase tracking-wide">CREATE COMMUNITY</h3>
+                <button className="w-full bg-[#533DDE] text-white py-3 px-4 rounded-xl font-semibold mb-6 flex items-center justify-center space-x-2">
+                  <span className="text-xl">+</span>
+                  <span className="text-base">NEW COMMUNITY</span>
+                </button>
+
+                <h4 className="text-xs font-semibold text-[#999999] mb-3 uppercase tracking-wide">RECENT COMMUNITY</h4>
+                <div className="space-y-2">
+                  {communities.map((community) => (
+                    <button
+                      key={community.name}
+                      className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left"
+                    >
+                      <span className="text-xl">{community.icon}</span>
+                      <span className="text-base font-medium text-[#333333]">{community.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Logout Button */}
+              <div className="pt-4 border-t border-gray-200">
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left text-red-600 hover:bg-red-50"
+                >
+                  <span className="text-xl">🚪</span>
+                  <span className="text-base">Logout</span>
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

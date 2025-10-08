@@ -25,7 +25,7 @@ function App() {
             </div>
           } />
           
-          {/* Additional routes can be added here */}
+          {/* Additional protected routes */}
           <Route path="/explore" element={
             <div className="flex">
               <Navbar />

@@ -20,6 +20,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login submitted:', formData);
+    
+    // Redirect to dashboard after successful login
+    navigate('/dashboard');
   };
 
   const handleSignUpRedirect = () => {
@@ -28,6 +31,11 @@ const Login = () => {
 
   const handleAdminRedirect = () => {
     navigate('/admin-login');
+  };
+
+  const handleForgotPassword = () => {
+    console.log('Forgot password clicked');
+    alert('Forgot password functionality coming soon!');
   };
 
   return (
@@ -83,9 +91,10 @@ const Login = () => {
                   type="email"
                   name="email"
                   placeholder="User mail"
-                  className="w-full bg-transparent outline-none text-[#999999] font-medium text-lg placeholder-[#999999]"
+                  className="w-full bg-transparent outline-none text-[#333333] font-medium text-lg placeholder-[#999999]"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </div>
 
@@ -95,9 +104,10 @@ const Login = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  className="w-full bg-transparent outline-none text-[#999999] font-medium text-lg placeholder-[#999999]"
+                  className="w-full bg-transparent outline-none text-[#333333] font-medium text-lg placeholder-[#999999]"
                   value={formData.password}
                   onChange={handleChange}
+                  required
                 />
               </div>
 
@@ -105,6 +115,7 @@ const Login = () => {
               <div className="flex justify-end">
                 <button
                   type="button"
+                  onClick={handleForgotPassword}
                   className="text-[#533DDE] font-medium text-lg hover:underline"
                 >
                   Forget password ?
